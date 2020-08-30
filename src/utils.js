@@ -24,8 +24,23 @@ const getElement = (selection) => {
 
 const formatPrice = () => {};
 
-const getStorageItem = () => {};
-const setStorageItem = () => {};
+// Levantar Datos de la Local Storage, corrida por STORE en todas las paginas
+const getStorageItem = (item) => {
+  let storageItem = localStorage.getItem(item); //Pasamos "Store"
+  if (storageItem) {
+    // SI EXISTE:
+    storageItem = JSON.parse(localStorage.getItem(item));
+  } else {
+    // SI NO, DEVOLVER EMPTY ARRAY
+    storageItem = [];
+  }
+  return storageItem;
+};
+
+// Pasar Datos al Local Storage, para luego ser levantados en diferentes Pages
+const setStorageItem = (name, item) => {
+  localStorage.setItem(name, JSON.stringify(item));
+};
 
 // Exports
 export {

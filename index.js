@@ -16,7 +16,7 @@ const init = async () => {
   if (products) {
     // Add Products to Store --->
     setupStore(products);
-    console.log(store);
+    // console.log(store);
   }
 };
 
