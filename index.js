@@ -17,6 +17,13 @@ const init = async () => {
     // Add Products to Store --->
     setupStore(products);
     // console.log(store);
+    //
+    // Queremos pasar los Featuerd only ---> Dentro de store buscamos la property of Featured
+    const featured = store.filter((product) => product.featured === true);
+    // console.log(featured); // Comprobamos que haya productos
+    //
+    // Display Products Function:
+    display(featured, getElement('.featured-center'));
   }
 };
 

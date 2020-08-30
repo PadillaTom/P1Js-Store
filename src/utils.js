@@ -22,7 +22,19 @@ const getElement = (selection) => {
   );
 };
 
-const formatPrice = () => {};
+// Convertidor de NUMEROS a PRECIO!
+// ************** LO MEJOR ES TENER TODO EN CENTAVOS Y A LA HORA DE DISPLAY TRANSFORMAR A DOLARES
+// ********** USANDO LA FORMAT FUNCTION LOS PASA A DOLARES A LA HORA DE DISPLAY
+// ********** BUSCAR EN LA DOCU DE MOZILLA
+const formatPrice = (price) => {
+  let formattedPrice = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    // FUNDAMENTAL: Formatear el price/100 y usar solamente 2 decimales
+  }).format((price / 100).toFixed(2));
+  return formattedPrice;
+};
+//
 
 // Levantar Datos de la Local Storage, corrida por STORE en todas las paginas
 const getStorageItem = (item) => {
@@ -36,11 +48,13 @@ const getStorageItem = (item) => {
   }
   return storageItem;
 };
+//
 
 // Pasar Datos al Local Storage, para luego ser levantados en diferentes Pages
 const setStorageItem = (name, item) => {
   localStorage.setItem(name, JSON.stringify(item));
 };
+//
 
 // Exports
 export {
