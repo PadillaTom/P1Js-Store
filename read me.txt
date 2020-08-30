@@ -1,0 +1,50 @@
+Que necesitamos?
+
+About:
+	Algunas palabras acerca del Peru y su comida / tradiciones.
+
+Contato: Idem Beer
+	Formulario de Contacto: (nombre, tel, email, consulta)
+	Nuestras --> Email, Telefono, Redes Sociales.
+
+Productos:
+	Categorias	---> Ceviches: Clasico, Veggie, Nikkei
+			---> Causas 
+			---> Tiratidos
+			---> Tamales
+			---> Chaufa
+			---> Pisco Sour
+			---> Entradas (papa huancaina, ocopa, etc)
+
+Fotos:
+	Background
+	Gallery (Antes del footer) -> Idem Swiss
+
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Nav
+------
+
+
+
+
+
+Hero
+------
+
+
+
+Nav
+------
+
+
+
+Nav
+------
+
+
+
+Nav
+------
+
+
