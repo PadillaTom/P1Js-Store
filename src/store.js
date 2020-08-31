@@ -29,7 +29,12 @@ const setupStore = (products) => {
 };
 // console.log(store); // Vemos la Empty Array Creada ; porque la Function SETUPSTORE se corre en  INDEX.JS
 // console.log(store); // Una vez asociadas las Functions entre si (pushear items al Storage, Levantar buscando "store")
-const findProduct = () => {};
+
+// Buscar Producto dentro del Cart
+const findProduct = (id) => {
+  let product = store.find((product) => product.id === id);
+  return product;
+};
 
 // Exportamos agrupadamente.
 export { store, setupStore, findProduct };
