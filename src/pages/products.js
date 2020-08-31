@@ -16,5 +16,9 @@ import { getElement } from '../utils.js';
 // Display la Store: (Que, Donde)
 const loading = getElement('.page-loading');
 display(store, getElement('.products-container'));
+// Habilitamos los Filters:
+setupSearch(store);
+setupCompanies(store);
+setupPrice(store);
 loading.style.display = 'none';
 // Seleccionamos LOADING, DISPLAY la store, Removemos Loading
