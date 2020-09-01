@@ -32,6 +32,14 @@ export const addToCart = (id) => {
     // console.log(cart); //Vemos como se agrega el Item al Array
     // Add to the DOM:
     addToCartDOM(product);
+  } else {
+    // Update Values :
+    const amount = increaseAmount(id);
+    const items = [...cartItemsDOM.querySelectorAll('.cart-item-amount')];
+    // console.log(items); // Vemos la Node List pasada a Array
+    // SI el item del array comparte ID: Mostrar como Text Content
+    const newAmount = items.find((value) => value.dataset.id === id);
+    newAmount.textContent = amount;
   }
   //
   //Add 1 to Amount:
@@ -48,6 +56,33 @@ export const addToCart = (id) => {
 };
 
 // Functions:
+//
+function increaseAmount(id) {
+  let newAmount;
+  cart = cart.map((cartItem) => {
+    if (cartItem.id === id) {
+      // Si matchea el ID
+      newAmount = cartItem.amount + 1;
+      cartItem = { ...cartItem, amount: newAmount }; // Tomamos el Cart Item y le acregamos 1 a su amount
+    }
+    return cartItem; // IF NOT
+  });
+  return newAmount;
+}
+//
+function decreaseAmount(id) {
+  let newAmount;
+  cart = cart.map((cartItem) => {
+    if (cartItem.id === id) {
+      // Si matchea el ID
+      newAmount = cartItem.amount - 1;
+      cartItem = { ...cartItem, amount: newAmount }; // Tomamos el Cart Item y le acregamos 1 a su amount
+    }
+    return cartItem; // IF NOT
+  });
+  return newAmount;
+}
+//
 function displayCartItemCount() {
   const amount = cart.reduce((total, cartItem) => {
     return (total += cartItem.amount); // Se le va sumando al Total cada AMOUNT de los Items
@@ -55,14 +90,55 @@ function displayCartItemCount() {
   // Add to DOM:
   cartItemCountDOM.textContent = amount;
 }
+//
 function displayCartTotal() {
   let total = cart.reduce((total, cartItem) => {
     return (total += cartItem.price * cartItem.amount); // total price*amount Para cada item
   }, 0);
   cartTotalDOM.textContent = `Total: ${formatPrice(total)}`;
 }
-function setupCartFunctionality() {}
-
+//
+function setupCartFunctionality() {
+  cartItemsDOM.addEventListener('click', function (e) {
+    //Buscar al Parent ( Siempre que tenemos Icons)
+    const element = e.target;
+    // console.log(element); // Comprobamos la Seleccion
+    const parent = e.target.parentElement;
+    const id = e.target.dataset.id;
+    const parentID = e.target.parentElement.dataset.id;
+    // Remove CART and DOM:
+    if (element.classList.contains('cart-item-remove-btn')) {
+      removeItem(id);
+      parent.parentElement.remove();
+    }
+    //Increase DOM:
+    if (parent.classList.contains('cart-item-increase-btn')) {
+      const newAmount = increaseAmount(parentID);
+      console.log(newAmount);
+      parent.nextElementSibling.textContent = newAmount;
+    }
+    //Decrease
+    if (parent.classList.contains('cart-item-decrease-btn')) {
+      const newAmount = decreaseAmount(parentID);
+      console.log(newAmount);
+      if (newAmount === 0) {
+        removeItem(id);
+        parent.parentElement.parentElement.remove(); // Removemos por completo el Item
+      } else {
+        parent.previousElementSibling.textContent = newAmount;
+      }
+    }
+    //
+    displayCartItemCount();
+    displayCartTotal();
+    setStorageItem('cart', cart); // Storage of CART
+  });
+}
+// Remove Item: FROM CART NOT DOM
+function removeItem(id) {
+  cart = cart.filter((cartItem) => cartItem.id !== id);
+}
+//
 function displayCartItemsDOM() {
   // Muestra el Amount de items en el Carrito, por todas las Paginas
   cart.forEach((cartItem) => {
@@ -84,5 +160,6 @@ const init = () => {
   displayCartItemsDOM();
   //
   // BTNS Functionality:
+  setupCartFunctionality();
 };
 init();
